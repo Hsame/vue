@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <form id="info">
+    <div>
+      <label for="user_name">이름</label>
+      <input type="text" name="user_name" id="user_name">
+    </div>
+    <div>
+      <label for="user_dept">소속</label>
+      <select name="user_dept" id="user_dept">
+        <option value="student">학생</option>
+        <option value="teacher">교수</option>
+      </select>
+    </div>
+    <div>
+      <label for="user_hobby">취미</label>
+      <input type="checkbox" name="user_hobby" value="독서">독서
+      <input type="checkbox" name="user_hobby" value="영화">영화
+      <input type="checkbox" name="user_hobby" value="글쓰기">글쓰기
+    </div>
+    <button type="button" name="input" id="input" onclick="javascript:jqEvent2();">등록</button>
+  </form>
+  <div id="show">
+      <table style="border: 1px solid black;">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>소속</th>
+            <th>취미1</th>
+            <th>취미2</th>
+            <th>취미3</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+  </div>
+
+<script>
+  function jqEvent2(){
+  let name = $('#user_name').val();
+  let dept = $('#user_dept :selected').text();
+  let hobby = $('#info > div:last :checked'); //유사 배열
+  let tr = $('<tr>');
+  tr.append($('<td />').text(name));//이름
+  tr.append($('<td />').text(dept));//소속
+  for(let i=0; i<hobby.length; i++) {
+    let td = $('<td />').text(hobby[i].value);
+    tr.append(td);
+  }
+  $('tbody:first').append(tr);
+
+  }
+
+</script> 
+</body>
+</html>

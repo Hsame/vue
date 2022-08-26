@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <title>Document</title>
+  <style>
+    .strike-through {
+      text-decoration: line-through;
+      color: lightgray
+    }
+
+    .dark {
+      background-color: gray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-bind : 속성과 바인딩 -->
+    <img src="clover.PNG" style="width: 20%;">직접지정
+    <img v-bind:src="fileName" v-bind:style="styleObject">v-bind로 지정
+
+    <a href="https://www.naver.com">링크를 직접 지정</a>
+    <a :href="myurl">링크를 v-bind로 지정</a>
+    <a href="#">링크를 v-bind로 지정(2) - {{myurl}}</a>
+  </div>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        fileName: 'clover.PNG',
+        styleObject: {
+          width: '20%',
+          border: '1px solid black'
+        },
+        myurl: 'https://www.naver.com'
+      }
+    })
+    //자바스크립트 
+    //document.querySelector('#app').firstElementChild.style.width = '30%'
+    //vue
+    //app.styleObject.width = '30%'
+
+  </script>
+  <hr>
+  <hr>
+  <div id="app2">
+    <!-- v-bind:style ="프로퍼티명" -->
+    <!-- v-bind:style = "{color : 프로퍼티명 }"-->
+    <!-- 두번쨰 방식 : background-color(케밥표기법) => backgroundColor(카멜 표기법) -->
+    <p style="color : burlywood;">문자색 직접 지정</p>
+    <p :style="{ color :myColor }">문자색 v-bind로 지정 </p>
+
+    <p style="font-size : 200%;">글씨 크기 직접 지정</p>
+    <p :style="{ fontSize :mysize }">글씨 크기 v-bind로 지정 </p>
+
+    <p style="background-color : aqua;">배경색 직접 지정</p>
+   <p :style="{ backgroundColor :myBackcolor, fontSize :mysize}">배경색을 v-bind로 지정 </p>
+
+  </div>
+
+  <script>
+    let app2 = new Vue({
+      el: '#app2',
+      data: {
+        myColor: 'blue',
+        mysize: '200%',
+        myBackcolor: 'aqua'
+      }
+    })
+  </script>
+
+  <div id="app3">
+    <p class="strike-through">직접 클래스 지정</p>
+    <p :class="myClass">v-bind로 단일 클래스 지정</p>
+    <p :class="[myClass, darkClass]">v-bind로 복수의 클래스 지정</p>
+    <p class="dark" :calss="{'strike-through' : isOn}">데이터로 클래스 ON/OFF</p>
+  </div>
+</body>
+<script>
+  let app3 = new Vue({
+    el : '#app3' ,
+    data : {
+      myClass : 'strike-through',
+      darkClass : 'dark',
+      isOn : true
+    }
+  })
+</script>
+
+</html>
